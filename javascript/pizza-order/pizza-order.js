@@ -10,45 +10,20 @@
  *
  * @returns {number} the price of the pizza
  */
+
+const PRICE_OF = {
+  Margherita: 7,
+  Caprese: 9,
+  Formaggio: 10,
+  ExtraSauce: 1,
+  ExtraToppings: 2,
+};
 export function pizzaPrice(pizza, ...extras) {
-  let cost = 0;
-
-  switch (pizza) {
-    case 'Margherita':
-      cost += 7;
-      break;
-    case 'Caprese':
-      cost += 9;
-      break;
-    case 'Formaggio':
-      cost += 10;
-      break;
-  }
-
-  cost += addExtras(extras);
-
-  return cost;
-}
-
-function addExtras(extras) {
-  let total = 0;
-
-  let extra = extras.pop();
-
-  switch (extra) {
-    case 'ExtraSauce':
-      total += 1;
-      break;
-    case 'ExtraToppings':
-      total += 2;
-      break;
-  }
-
   if (extras.length === 0) {
-    return total;
+    return PRICE_OF[pizza];
+  } else {
+    return PRICE_OF[extras.pop()] + pizzaPrice(pizza, ...extras);
   }
-
-  return (total += addExtras(extras));
 }
 
 /**

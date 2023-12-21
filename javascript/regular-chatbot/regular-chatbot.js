@@ -8,7 +8,11 @@
  */
 
 export function isValidCommand(command) {
-  throw new Error('Please implement the isValidCommand function');
+  const reg = /chatbot/i;
+
+  let result = command.match(reg);
+
+  return result.index === 0;
 }
 
 /**
@@ -18,7 +22,9 @@ export function isValidCommand(command) {
  * @returns {string} The message without the emojis encryption
  */
 export function removeEmoji(message) {
-  throw new Error('Please implement the removeEmoji function');
+  const reg = new RegExp('emoji[0-9]{4}', 'g');
+
+  return message.replace(reg, '');
 }
 
 /**
@@ -28,7 +34,13 @@ export function removeEmoji(message) {
  * @returns {string} the Chatbot response to the phone Validation
  */
 export function checkPhoneNumber(number) {
-  throw new Error('Please implement the checkPhoneNumber function');
+  let reg = /\(\+\d\d\) \d{3}-\d{3}-\d{3}/g;
+
+  if (reg.test(number)) {
+    return `Thanks! You can now download me to your phone.`;
+  } else {
+    return `Oops, it seems like I can't reach out to ${number}`;
+  }
 }
 
 /**
@@ -38,7 +50,9 @@ export function checkPhoneNumber(number) {
  * @returns {string[] | null} all the possible URL's that the user may have answered
  */
 export function getURL(userInput) {
-  throw new Error('Please implement the userInput function');
+  const reg = /\w*\.\w*/g;
+
+  return userInput.match(reg);
 }
 
 /**
@@ -48,5 +62,9 @@ export function getURL(userInput) {
  * @returns {string} Greeting from the chatbot
  */
 export function niceToMeetYou(fullName) {
-  throw new Error('Please implement the fullName function');
+  const reg = /(\w+), (\w+)/g;
+
+  return fullName.replace(reg, function (match, lastName, firstName) {
+    return `Nice to meet you, ${firstName} ${lastName}`;
+  });
 }

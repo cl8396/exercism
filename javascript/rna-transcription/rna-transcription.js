@@ -4,22 +4,15 @@
 //
 
 export const toRna = (input) => {
-  let result = [];
-  Array.from(input).forEach((letter) => {
-    switch (letter) {
-      case 'C':
-        result.push('G');
-        break;
-      case 'G':
-        result.push('C');
-        break;
-      case 'T':
-        result.push('A');
-        break;
-      case 'A':
-        result.push('U');
-        break;
-    }
-  });
-  return result.join('');
+  const letterMap = {
+    G: 'C',
+    C: 'G',
+    T: 'A',
+    A: 'U',
+  };
+
+  return input
+    .split('')
+    .map((letter) => letterMap[letter])
+    .join('');
 };
